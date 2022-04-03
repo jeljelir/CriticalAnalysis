@@ -31,7 +31,7 @@ import sqlite3
 #requests = requ.session()
 
 def db_init():
-    connection = sqlite3.connect("Milad.db")
+    connection = sqlite3.connect("res.db")
     cursor = connection.cursor()
     query = """CREATE TABLE IF NOT EXISTS "files" (
 	"pkg"	TEXT,
@@ -239,7 +239,7 @@ def handler(hs, pkg):
         if s != -1:
             vas = '`net.jhoobin.jhub`'
         text = text + "------\nPKG Name: \n`" + str(pkg) + "`\n------\nSHA256: \n`" + vp['sha256'] + "`\n------\nDetected: " + str(vp['positives']) + "/" + str(vp['total']) + "\n------\nVAS: " + vas + "\n------\nReport Link:\n" + 'https://www.virustotal.com/gui/file/' + str(vp['sha256'])
-        db("insert", [pkg, vp['positives'], vp['sha256']], "Milad.db", "files", None, None, None )
+        db("insert", [pkg, vp['positives'], vp['sha256']], "res.db", "files", None, None, None )
         telog(text)
         runn = runn - 1
         return 0
@@ -387,7 +387,7 @@ def run(pkg):
         return 0
     if int(r.headers['Content-Length']) > 32 * 1024 * 1024:
         print("MORE THAN 32MB")
-        db("insert", [pkg, str(r.headers['Content-Length'])], "Milad.db", "larges", None, None, None )
+        db("insert", [pkg, str(r.headers['Content-Length'])], "res.db", "larges", None, None, None )
         return 0
 
     params = {'apikey': VT_KEY, 'url': link}
@@ -489,7 +489,7 @@ def run(pkg):
 
 threading.Thread(target=dispatch).start()
 db_init()
-b = db("select", ["pkg"], "Milad.db", "files", None, None, "all")
+b = db("select", ["pkg"], "res.db", "files", None, None, "all")
 c= []
 for bb in b:
     c.append(bb[0])
