@@ -2,7 +2,7 @@ from xml.dom import minidom
 import requests
 
 urls = []
-res = requests.get('https://cafebazaar.ir/app-sitemap.xml')
+res = requests.get('https://example.com/app-sitemap.xml')
 xmldoc = minidom.parseString(res.text)
 itemlist = xmldoc.getElementsByTagName('loc')
 for s in itemlist:
