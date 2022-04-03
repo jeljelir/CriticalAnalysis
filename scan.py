@@ -153,30 +153,6 @@ def db(action, params: list, db, table, where: list, and_or, fetch):
     return query
 
 
-def telog(msg):
-    if con == False:
-        telogg(msg)
-        return 0
-    while True:
-        try:
-            requests.get('https://api.telegram.org/TOKEN/sendMessage?chat_id=CHAT&parse_mode=Markdown&text=' + str(msg), timeout=10)
-            break
-        except requ.Timeout:
-            pass
-        except requ.exceptions.ConnectionError:
-            pass
-
-def telogg(msg):
-    while True:
-        try:
-            requests.get('https://api.telegram.org/TOKEN/sendMessage?chat_id=PV&parse_mode=Markdown&text=' + str(msg), timeout=10)
-            break
-        except requ.Timeout:
-            pass
-        except requ.exceptions.ConnectionError:
-            pass
-
-
 def handler(hs, pkg):
     global runn
     VT_KEY = 'TOKEN'
