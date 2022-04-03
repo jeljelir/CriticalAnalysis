@@ -298,7 +298,7 @@ def handler(hs, pkg):
         text = "analysis done. \ndescription:\n"
         for o in list(vl.keys()):
             text = text + o + ":\n`" + str(vl[o]) + "`\n------\n"
-        db("insert", [pkg, v['positives'], v['sha256']], "Milad.db", "files", None, None, None )
+        db("insert", [pkg, v['positives'], v['sha256']], "res.db", "files", None, None, None )
         text = text + "------\nPKG Name: \n`" + str(pkg) + "`\n------\nSHA256: \n`" + v['sha256'] + "`\n------\nDetected: " + str(v['positives']) + "/" + str(v['total']) + "\n------\nReport Link:\n" + 'https://www.virustotal.com/gui/file/' + str(v['sha256'])
     except:
         print(str(v))
